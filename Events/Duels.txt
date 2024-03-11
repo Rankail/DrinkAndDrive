@@ -1,0 +1,8 @@
+Schnick,Schnuck,Schnuck:
+{} vs {}
+
+High Card:
+{} vs {}
+
+Blinzelduell:
+{} vs {}
