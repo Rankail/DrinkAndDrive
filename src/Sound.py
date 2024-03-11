@@ -7,7 +7,6 @@ Created on Mon Mar 11 22:24:35 2024
 import pygame
 import os
 import random
-import time
 
 def read_sounds():
     sounds = []
@@ -22,8 +21,13 @@ def play_sound(sound_file):
     pygame.mixer.music.load(path)
     pygame.mixer.music.play()
     
-def get_random_sounds(sounds,count_random_events):
+def choose_random_sounds(sounds,count_random_events):
     random_sounds= []
     for i in range(0,count_random_events):
         random_sounds.append(sounds[random.randint(0, len(sounds)-1)])        
+    return random_sounds
+
+def get_random_sounds(count_random_events):
+    sounds = read_sounds()
+    random_sounds = choose_random_sounds(sounds, count_random_events)
     return random_sounds
