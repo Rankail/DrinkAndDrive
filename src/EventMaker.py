@@ -6,7 +6,6 @@ Created on Mon Mar 11 20:27:02 2024
 """
 
 import os
-import math
 import random
 
 def read_events():
@@ -17,7 +16,7 @@ def read_events():
             events = file.read().split('\n\n')  
     else:
         print("'Events.txt'nicht gefunden.")
-    return events;
+    return events
 
 def choose_random_events(events,count_random_events):
     random_events= []
