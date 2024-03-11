@@ -1,0 +1,19 @@
+Finger an die Nase
+
+Symbol raten
+
+Wortkette:
+{} startet
+
+Boden ist Lava
+
+Alle trinken
+
+Schnick,Schnuck,Schnuck:
+{} vs {}
+
+High Card:
+{} vs {}
+
+Blinzelduell:
+{} vs {}
