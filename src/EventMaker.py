@@ -37,6 +37,3 @@ def get_random_events_and_intervalls(events,count_random_events,timespan):
     random_events = choose_random_events(events, count_random_events)
     random_timestamp = choose_random_intevalls(count_random_events, timespan)
     return (random_events,random_timestamp)
-
-print(choose_random_intevalls(10, 40))
-print(sum(choose_random_intevalls(10, 40)))
