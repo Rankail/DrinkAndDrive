@@ -59,12 +59,11 @@ class EventContainer:
         self.layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         for i in range(size):
-            label = QLabel("Hello there")
-            label.setText("Hello there")
+            label = QLabel("")
             importance = (i+1) / size
             label.setAlignment(Qt.AlignmentFlag.AlignCenter)
-            label.setFixedHeight(200)
-            label.setStyleSheet(f"font: {40 * importance}pt; font-weight: semi-bold; color: rgba(0, 0, 0, {importance * 255});")
+            label.setFixedHeight((int)((importance) * 200))
+            label.setStyleSheet(f"font: {50 * importance}pt; font-weight: semi-bold; color: rgba(0, 0, 0, {importance * 255});")
 
             self.labels.append(label)
             self.layout.addWidget(label)

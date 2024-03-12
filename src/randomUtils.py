@@ -18,7 +18,7 @@ def choose_random_events(events,count_random_events):
     return random_events
 
 def choose_random_intevalls(count_random_events,timespan):
-    random_timestamp=random.sample(range(0,timespan), count_random_events)
+    random_timestamp=random.sample(range(1,timespan+1), count_random_events)
     random_timestamp.sort()
     start = 0
     for index,timestamp in enumerate(random_timestamp):

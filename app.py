@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow
-from events import EventType, EventContainer, EventEmitter
-from randomUtils import read_events
-from soundUtils import SoundChooser
+from src.events import EventType, EventContainer, EventEmitter
+from src.randomUtils import read_events
+from src.soundUtils import SoundChooser
 
 class NoFriendsError(Exception):
     pass
