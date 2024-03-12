@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Mar 11 20:27:02 2024
-
-@author: Marvin
-"""
-
 import os
 import random
 
@@ -15,7 +8,7 @@ def read_events():
         with open(file_path, 'r') as file:
             events = file.read().split('\n\n')  
     else:
-        print("'Events.txt'nicht gefunden.")
+        raise LookupError("'Events.txt'nicht gefunden.")
     return events
 
 def choose_random_events(events,count_random_events):
@@ -36,4 +29,4 @@ def choose_random_intevalls(count_random_events,timespan):
 def get_random_events_and_intervalls(events,count_random_events,timespan):
     random_events = choose_random_events(events, count_random_events)
     random_timestamp = choose_random_intevalls(count_random_events, timespan)
-    return (random_events,random_timestamp)
+    return zip(random_events,random_timestamp)

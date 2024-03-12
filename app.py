@@ -1,14 +1,18 @@
-from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout
-from PyQt5.QtCore import Qt
-from src.game import Event, EventWidget
-from src.EventMaker import read_events, get_random_events_and_intervalls
+from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow
+from events import EventType, EventContainer, EventEmitter
+from randomUtils import read_events
+from soundUtils import SoundChooser
+
+class NoFriendsError(Exception):
+    pass
 
 if __name__ == "__main__":
     app = QApplication([])
 
+    window = QMainWindow()
+    window.setWindowTitle("Drink & Drive")
+
     mainWidget = QWidget()
-    baseLayout = QVBoxLayout(mainWidget)
-    baseLayout.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
     players = [
         "Yoshi",
@@ -16,31 +20,41 @@ if __name__ == "__main__":
         "Marvin"
     ]
 
-    eventHistory: list[EventWidget] = []
-    historySize: int = 3
+    if len(players) < 2:
+        raise NoFriendsError("You have too few friends to play this game")
 
-    def removeOldestEvent():
-        oldest = eventHistory.pop()
-        baseLayout.removeWidget(oldest.layout)
-        for i, ew in enumerate(eventHistory):
-            importance = (i + 1) / historySize
-            ew.updateImportance(importance)
+    events = EventContainer(players, 3)
 
-    def addEvent(event: Event):
-        if len(eventHistory) >= historySize:
-            removeOldestEvent()
+    mainWidget.setLayout(events.layout)
+    window.setCentralWidget(mainWidget)
 
-        eventHistory.insert(0, event.getWidget())
+    sounds = SoundChooser()
+    for id, eventStr in enumerate(read_events()):
+        eventType = EventType(id, eventStr, sounds.getRandom())
+        events.addEventType(eventType)
 
-    events: list[Event] = []
-    eventStrs = read_events()
-    for eventStr in eventStrs:
-        print(eventStr)
+    if len(events.eventTypes) == 0:
+        raise ValueError("Need at least 1 event")
 
-    timespan = int(input("Dauer (in min): "))
+    timespan = int(input("Duration (in min): "))
     eventCount = int(input("Amount of events: "))
 
-    get_random_events_and_intervalls(events, eventCount, timespan)
+    if timespan < eventCount:
+        raise ValueError("Cant play more than 1 event/min")
+    
+    if timespan == 0:
+        raise ValueError("Timespan must be greater than 0")
+    
+    if timespan == 0:
+        raise ValueError("Amount of events should be greater than 0")
 
-    mainWidget.show()
+    worker = EventEmitter(eventSize=len(events.eventTypes), eventCount=eventCount, timespan=timespan)
+
+    worker.eventReady.connect(events.callEvent)
+    worker.finished.connect(app.quit)
+
+    worker.start()
+
+    window.showFullScreen()
+    
     app.exec()
