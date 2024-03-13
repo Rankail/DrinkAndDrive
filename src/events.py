@@ -1,5 +1,6 @@
 import time
 import random
+import numpy
 from PyQt5.QtWidgets import QLabel, QVBoxLayout
 from PyQt5.QtCore import Qt, QThread, pyqtSignal
 
@@ -38,10 +39,17 @@ class EventType:
         self.text = text
         self.sound = sound
 
+    def getDrinkAmount() -> str:
+        return numpy.random.choice(["1 sip", "2 sips", "3 sips", "1 shot"],
+                          p=[0.5,     0.3,      0.1,      0.1])
+
     def getText(self, players: list[str]) -> str:
         playerCount = self.text.count("{}")
         selected = random.sample(players, playerCount)
-        return self.text.format(*selected)
+        text = self.text
+        text = text.format(*selected)
+        text += '\n' + EventType.getDrinkAmount()
+        return text
     
 
 class EventContainer:
@@ -62,8 +70,8 @@ class EventContainer:
             label = QLabel("")
             importance = (i+1) / size
             label.setAlignment(Qt.AlignmentFlag.AlignCenter)
-            label.setFixedHeight((int)((importance) * 200))
-            label.setStyleSheet(f"font: {50 * importance}pt; font-weight: semi-bold; color: rgba(0, 0, 0, {importance * 255});")
+            label.setFixedHeight((int)((importance) * 250))
+            label.setStyleSheet(f"font: {40 * importance}pt; font-weight: semi-bold; color: rgba(0, 0, 0, {importance * 255});")
 
             self.labels.append(label)
             self.layout.addWidget(label)

@@ -16,6 +16,7 @@ def play_sound(sound_file):
     path = "./Sounds/" + sound_file
     pygame.mixer.init()
     pygame.mixer.music.load(path)
+    pygame.mixer.music.set_volume(1.0)
     pygame.mixer.music.play()
     
 def choose_random_sounds(sounds,count_random_events):

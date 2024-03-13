@@ -1,4 +1,4 @@
-Finger an die Nase
+Finger in die Nase
 
 Symbol raten
 
@@ -9,7 +9,7 @@ Boden ist Lava
 
 Alle trinken
 
-Schnick,Schnuck,Schnuck:
+Schnick, Schnuck, Schnuck:
 {} vs {}
 
 High Card:

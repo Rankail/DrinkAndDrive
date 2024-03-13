@@ -15,9 +15,11 @@ if __name__ == "__main__":
     mainWidget = QWidget()
 
     players = [
-        "Yoshi",
+        "Joshi",
         "Samuel",
-        "Marvin"
+        "Marvin",
+        "Jan",
+        "Leon"
     ]
 
     if len(players) < 2:
